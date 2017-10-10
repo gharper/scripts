@@ -1,0 +1,33 @@
+#!/bin/bash
+
+UPDATE_RESULTS=$(brew update 2>&1)
+UPDATE=0
+if [[ ${UPDATE_RESULTS} == *"Already up-to-date"* ]]; then
+  echo "Already up-to-date."
+else
+  # TODO: Parse "==>" sections into separate variables and handle them separately
+  echo -e "UPDATE_RESULTS:\n$UPDATE_RESULTS"
+fi
+
+while IFS= read -r line
+do
+  if [[ ${line} == "==> Deleted Formulae"* ]]; then
+    break
+  fi
+  if [[ ${line} == "==> Updated "* ]] || [[ ${line} == "==> New "* ]]; then
+    UPDATE=1
+    echo -e "\n========================================================================\n"
+    echo "===${line} <====="
+    echo -e "\n========================================================================\n"
+    continue
+  fi
+  if [[ $UPDATE -eq 1 ]]; then
+    brew info $line
+    echo -e "\n------------------------------------------------------------------------\n"
+  else
+    continue
+  fi
+done <<< "$UPDATE_RESULTS"
+
+brew upgrade
+brew cleanup
