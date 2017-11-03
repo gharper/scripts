@@ -164,6 +164,9 @@ defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
 #"Showing all filename extensions in Finder by default"
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
+#"Show hidden files in Finder by default"
+defaults write com.apple.finder AppleShowAllFiles YES
+
 #"Disabling the warning when changing a file extension"
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
