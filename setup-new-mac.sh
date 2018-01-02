@@ -234,6 +234,9 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 # Don't automatically rearrange Spaces based on most recent use
 defaults write com.apple.dock mru-spaces -bool false
 
+# Ignore rich text when pasting into Terminal
+defaults write com.apple.Terminal CopyAttributesProfile com.apple.Terminal.no-attributes
+
 killall Finder
 
 echo "Done!"
