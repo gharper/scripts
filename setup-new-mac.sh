@@ -6,11 +6,10 @@ echo "Please add this public key to Github \n"
 echo "https://github.com/account/ssh \n"
 read -p "Press [Enter] key after this..."
 
-echo "Installing xcode-stuff"
+echo "Installing xcode..."
 xcode-select --install
 
-# Check for Homebrew,
-# Install if we don't have it
+# Install Homebrew if not already present
 if test ! $(which brew); then
   echo "Installing homebrew..."
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -20,22 +19,19 @@ fi
 echo "Updating homebrew..."
 brew update
 
-echo "Installing Git..."
+echo "Installing git..."
 brew install git
+brew install git-extras
+brew install git-flow
+brew install legit
 
-echo "Git config"
-
+echo "Configuring git..."
 git config --global user.name "Geromy Harper"
 git config --global user.email geromy+github@gmail.com
 
 echo "Installing personalization packages..."
 brew install lastpass-cli
 brew install trash
-
-echo "Installing git utilities..."
-brew install git-extras
-brew install git-flow
-brew install legit
 
 echo "Installing shell utilities..."
 brew install gnupg
@@ -56,6 +52,7 @@ brew install imagemagick
 brew install jq
 brew install node
 brew install python
+brew install python3
 brew install pip-completion
 brew install shellcheck
 
@@ -65,13 +62,13 @@ brew install fortune
 brew install lolcat
 brew install thefuck
 
-echo "Cleaning up brew"
+echo "Cleaning up brew..."
 brew cleanup
 
-echo "Installing homebrew cask"
+echo "Installing homebrew cask..."
 brew install caskroom/cask/brew-cask
 
-echo "Copying dotfiles from Github"
+echo "Installing dotfiles from Github..."
 cd ~
 git clone --recursive git@github.com:gharper/.dotfiles.git ./.dotfiles
 cd ~/.dotfiles
@@ -112,11 +109,11 @@ apps=(
 echo "Installing apps with Cask..."
 brew cask install --appdir="/Applications" ${apps[@]}
 
+echo "Cleaning up brew..."
 brew cask cleanup
 brew cleanup
 
 echo "Customizing OSX settings..."
-
 #"Disabling system-wide resume"
 #defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
 
@@ -242,6 +239,7 @@ defaults write com.apple.dock mru-spaces -bool false
 # Ignore rich text when pasting into Terminal
 defaults write com.apple.Terminal CopyAttributesProfile com.apple.Terminal.no-attributes
 
+echo "Restarting Finder to apply settings..."
 killall Finder
 
 echo "Done!"
