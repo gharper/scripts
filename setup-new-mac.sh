@@ -50,13 +50,14 @@ brew install zsh-completions
 brew install zsh-syntax-highlighting
 
 echo "Installing dev tools..."
+brew install bats
+brew install gist
+brew install imagemagick
+brew install jq
 brew install node
 brew install python
 brew install pip-completion
-brew install imagemagick
-brew install gist
 brew install shellcheck
-brew install jq
 
 echo "Installing misc fun stuff..."
 brew install cowsay
