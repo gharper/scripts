@@ -28,37 +28,41 @@ echo "Git config"
 git config --global user.name "Geromy Harper"
 git config --global user.email geromy+github@gmail.com
 
-
-echo "Installing brew git utilities..."
-brew install git-extras
-brew install legit
-brew install git-flow
-
-echo "Installing other brew stuff..."
-brew install wget
-brew install trash
-brew install node
-brew install python
-brew install pip-completion
-brew install imagemagick
-brew install fortune
-brew install htop-osx
-brew install the_silver_searcher
-brew install gist
-brew install shellcheck
-brew install jq
+echo "Installing personalization packages..."
 brew install lastpass-cli
-brew install lolcat
-brew install cowsay
+brew install trash
+
+echo "Installing git utilities..."
+brew install git-extras
+brew install git-flow
+brew install legit
+
+echo "Installing shell utilities..."
+brew install gnupg
 brew install mtr
 brew install openssl
 brew install pstree
-brew install thefuck
+brew install the_silver_searcher
+brew install wget
+brew install yubikey-personalization
 brew install zsh
 brew install zsh-completions
 brew install zsh-syntax-highlighting
 
-#@TODO install our custom fonts and stuff
+echo "Installing dev tools..."
+brew install node
+brew install python
+brew install pip-completion
+brew install imagemagick
+brew install gist
+brew install shellcheck
+brew install jq
+
+echo "Installing misc fun stuff..."
+brew install cowsay
+brew install fortune
+brew install lolcat
+brew install thefuck
 
 echo "Cleaning up brew"
 brew cleanup
@@ -104,13 +108,13 @@ apps=(
 
 # Install apps to /Applications
 # Default is: /Users/$user/Applications
-echo "installing apps with Cask..."
+echo "Installing apps with Cask..."
 brew cask install --appdir="/Applications" ${apps[@]}
 
 brew cask cleanup
 brew cleanup
 
-echo "Setting some Mac settings..."
+echo "Customizing OSX settings..."
 
 #"Disabling system-wide resume"
 #defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
