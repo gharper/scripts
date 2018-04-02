@@ -31,3 +31,5 @@ done <<< "$UPDATE_RESULTS"
 
 brew upgrade
 brew cleanup
+
+softwareupdate --install --all
