@@ -5,6 +5,10 @@ set -o pipefail
 set -o nounset
 #set -o xtrace
 
+# TODO: Break this up into functions
+# TODO: Call for brew-cask as well
+# TODO: Add commandline options (help, verbose, etc)
+
 UPDATE_RESULTS=$(brew update 2>&1)
 UPDATE=0
 if [[ ${UPDATE_RESULTS} == *"Already up-to-date"* ]]; then
@@ -30,7 +34,7 @@ do
     continue
   fi
   if [[ $UPDATE -eq 1 ]]; then
-    mapfile -t pkginfo < <(brew info ${line})
+    mapfile -t pkginfo < <(brew info "${line}")
     echo "${pkginfo[1]} (${pkginfo[4]})"
     echo "${pkginfo[3]}"
     echo "${pkginfo[2]}"
@@ -42,5 +46,7 @@ done <<< "$UPDATE_RESULTS"
 
 brew upgrade
 brew cleanup
+brew cask upgrade
+brew cask cleanup
 
 softwareupdate --install --all
