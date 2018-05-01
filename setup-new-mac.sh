@@ -34,6 +34,7 @@ brew install lastpass-cli
 brew install trash
 
 echo "Installing shell utilities..."
+brew install bash
 brew install gnupg
 brew install mtr
 brew install openssl

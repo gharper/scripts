@@ -1,6 +1,6 @@
-
-#!/bin/bash
+#!/usr/bin/env bash
 # Monitors processes for runaways & kills if found
+
 TMP_FILE=/tmp/strace.out
 LOG_FILE=/var/log/runaway_proc_mon.log
 NOTIFY_EMAIL=””

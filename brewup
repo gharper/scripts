@@ -1,4 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+#set -o xtrace
 
 UPDATE_RESULTS=$(brew update 2>&1)
 UPDATE=0
@@ -6,24 +11,30 @@ if [[ ${UPDATE_RESULTS} == *"Already up-to-date"* ]]; then
   echo "Already up-to-date."
 else
   # TODO: Parse "==>" sections into separate variables and handle them separately
-  echo -e "UPDATE_RESULTS:\n$UPDATE_RESULTS"
+  echo "UPDATE_RESULTS:"
+  echo "${UPDATE_RESULTS}"
 fi
 
 while IFS= read -r line
 do
   if [[ ${line} == "==> Deleted Formulae"* ]]; then
+    # Skip because we don't care about deleted stuff
     break
   fi
   if [[ ${line} == "==> Updated "* ]] || [[ ${line} == "==> New "* ]]; then
     UPDATE=1
-    echo -e "\n========================================================================\n"
+    # Section breaks for readability
+    echo "========================================================================"
     echo "===${line} <====="
-    echo -e "\n========================================================================\n"
+    echo "========================================================================"
     continue
   fi
   if [[ $UPDATE -eq 1 ]]; then
-    brew info $line
-    echo -e "\n------------------------------------------------------------------------\n"
+    mapfile -t pkginfo < <(brew info ${line})
+    echo "${pkginfo[1]} (${pkginfo[4]})"
+    echo "${pkginfo[3]}"
+    echo "${pkginfo[2]}"
+    echo "------------------------------------------------------------------------"
   else
     continue
   fi
