@@ -35,8 +35,8 @@ do
   fi
   if [[ $UPDATE -eq 1 ]]; then
     mapfile -t pkginfo < <(brew info "${line}")
-    echo "${pkginfo[1]} (${pkginfo[4]})"
-    echo "${pkginfo[3]}"
+    echo "${pkginfo[1]} (${pkginfo[3]})"
+    echo "${pkginfo[4]}"
     echo "${pkginfo[2]}"
     echo "------------------------------------------------------------------------"
   else
