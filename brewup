@@ -25,7 +25,7 @@ do
     # Skip because we don't care about deleted stuff
     break
   fi
-  if [[ ${line} == "==> Updated "* ]] || [[ ${line} == "==> New "* ]]; then
+  if [[ ${line} == "==> Updated "* ]] || [[ ${line} == "==> New "* ]] || [[ ${line} == "==> Renamed "* ]] ; then
     UPDATE=1
     # Section breaks for readability
     echo "========================================================================"
