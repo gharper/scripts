@@ -35,7 +35,11 @@ brew install trash
 
 echo "Installing shell utilities..."
 brew install bash
+brew install binutils
+brew install gawk
 brew install gnupg
+brew install gnu-sed --with-default-names
+brew install grep --with-default-names
 brew install mtr
 brew install openssl
 brew install pstree
@@ -239,6 +243,23 @@ defaults write com.apple.dock mru-spaces -bool false
 
 # Ignore rich text when pasting into Terminal
 defaults write com.apple.Terminal CopyAttributesProfile com.apple.Terminal.no-attributes
+
+# Use POSIX style home/end behavior
+mkdir ~/Library/KeyBindings
+echo '{
+"\\UF729" = "moveToBeginningOfLine:";                            /* Home */
+"\\UF72B" = "moveToEndOfLine:";                                  /* End */
+"$\\UF729" = "moveToBeginningOfLineAndModifySelection:";         /* Shift + Home */
+"$\\UF72B" = "moveToEndOfLineAndModifySelection:";               /* Shift + End */
+"@\\UF729" = "moveToBeginningOfDocument:";                       /* Cmd + Home */
+"@\\UF72B" = "moveToEndOfDocument:";                             /* Cmd + End */
+"@$\\UF729" = "moveToBeginningOfDocumentAndModifySelection:";    /* Shift + Cmd + Home */
+"@$\\UF72B" = "moveToEndOfDocumentAndModifySelection:";          /* Shift + Cmd + End */
+"@\\Uf702" = "moveWordLeft:";                                    /* Cmd + Left */
+"@\\Uf703" = "moveWordRight:";                                   /* Cmd + Right */
+"@$\\Uf702" = "moveWordLeftAndModifySelection:";                 /* Shift + Cmd + Left */
+"@$\\Uf703" = "moveWordRightAndModifySelection:";                /* Shift + Cmd + Right */
+}' > ~/Library/KeyBindings/DefaultKeyBinding.dict
 
 echo "Restarting Finder to apply settings..."
 killall Finder

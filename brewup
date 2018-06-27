@@ -49,4 +49,8 @@ brew cleanup
 brew cask upgrade
 brew cask cleanup
 
+# Update OS X software from the App Store
 softwareupdate --install --all
+
+# Clear the quicklook cache to prevent snooping
+qlmanage -r cache
