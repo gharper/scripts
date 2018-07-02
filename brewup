@@ -21,11 +21,11 @@ fi
 
 while IFS= read -r line
 do
-  if [[ ${line} == "==> Deleted Formulae"* ]]; then
-    # Skip because we don't care about deleted stuff
+  if [[ ${line} == "==> Deleted Formulae"* ]] || [[ ${line} == "==> Renamed "* ]]; then
+    # Skip because we don't care about deleted or renamed stuff
     break
   fi
-  if [[ ${line} == "==> Updated "* ]] || [[ ${line} == "==> New "* ]] || [[ ${line} == "==> Renamed "* ]] ; then
+  if [[ ${line} == "==> Updated "* ]] || [[ ${line} == "==> New "* ]]; then
     UPDATE=1
     # Section breaks for readability
     echo "========================================================================"
