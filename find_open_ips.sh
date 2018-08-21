@@ -22,10 +22,22 @@ fi
 
 while IFS== read -r region netrange; do
     jumphost="$(echo ${region} | cut -c1-3)8linjump.qa.skytap.com"
+    if [[ $(echo ${region} | cut -c1) == '#' ]]; then
+        continue
+    fi
+    if [[ $(echo ${region} | cut -c1-3) == 'sea' ]]; then
+        jumphost="tuk8linjump.qa.skytap.com"
+    fi
     if [[ $(echo ${region} | cut -c4) == '1' ]]; then
         jumphost="$(echo ${region} | cut -c1-3)1linjump.prod.skytap.com"
     fi
     echo "Scanning ${region}: ${netrange} from ${jumphost}"
+
+    # fping -dug: Use DNS to lookup address, show unreachable addresses, generate range from addr/mask
+    # cut -d' ' -f11-: print only the IP address and/or DNS name
+    # grep -v skytap: remove any lines with a DNS entry
+    # grep .: remove blank lines
+    # End result should be a list of addresses that didn't ping and aren't in DNS
     sshpass -e ssh ${jumphost} "fping -dug ${netrange} 2>&1 | cut -d' ' -f11- | grep -v skytap | grep ." > "${region}.out" &
     pids="$pids $!"
 done < "${1}"

@@ -45,9 +45,8 @@ do
 done <<< "$UPDATE_RESULTS"
 
 brew upgrade
-brew cleanup
 brew cask upgrade
-brew cask cleanup
+brew cleanup
 
 # Update OS X software from the App Store
 softwareupdate --install --all
