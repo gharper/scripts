@@ -49,7 +49,12 @@ brew cask upgrade
 brew cleanup
 
 # Update OS X software from the App Store
-softwareupdate --install --all
+if hash mas 2>/dev/null; then
+  mas upgrade
+else
+  softwareupdate --install --all
+fi
+
 
 # Clear the quicklook cache to prevent snooping
 qlmanage -r cache

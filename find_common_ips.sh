@@ -7,16 +7,14 @@
 #
 # Use: ~/git/scripts/find_common_ips.sh <filename pattern>
 
-set -o errexit
 set -o pipefail
 set -o nounset
 #set -o xtrace
 
 for ((octet=1;octet<=255;octet++)); do
     regex="\b((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){3}${octet}\b"
-    skip_address=$(egrep -L "$regex" ./*.out 2>&1)
+    skip_address=$(egrep -L "$regex" *.out 2>&1)
     if [[ -z ${skip_address} ]]; then
-
         echo "xxx.xxx.xxx.${octet}"
     fi
 done

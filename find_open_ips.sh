@@ -29,7 +29,8 @@ while IFS== read -r region netrange; do
         jumphost="tuk8linjump.qa.skytap.com"
     fi
     if [[ $(echo ${region} | cut -c4) == '1' ]]; then
-        jumphost="$(echo ${region} | cut -c1-3)1linjump.prod.skytap.com"
+        #jumphost="$(echo ${region} | cut -c1-3)1linjump.prod.skytap.com"
+        jumphost="tuk1linjump.prod.skytap.com"
     fi
     echo "Scanning ${region}: ${netrange} from ${jumphost}"
 
