@@ -55,6 +55,5 @@ else
   softwareupdate --install --all
 fi
 
-
 # Clear the quicklook cache to prevent snooping
-qlmanage -r cache
+qlmanage -r cache &> /dev/null
