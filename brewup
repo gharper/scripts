@@ -44,16 +44,23 @@ do
   fi
 done <<< "$UPDATE_RESULTS"
 
+echo "Running: brew upgrade"
 brew upgrade
+echo "Running: brew cask upgrade"
 brew cask upgrade
+echo "Running: brew cleanup"
 brew cleanup
 
 # Update OS X software from the App Store
 if hash mas 2>/dev/null; then
+  echo "Running: mas upgrade"
   mas upgrade
 else
+  echo "[mas not found]"
+  echo "Running: softwareupdate --install --all"
   softwareupdate --install --all
 fi
 
 # Clear the quicklook cache to prevent snooping
+echo "Clearing quicklook cache to prevent snooping"
 qlmanage -r cache &> /dev/null
