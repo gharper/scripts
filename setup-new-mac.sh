@@ -55,6 +55,7 @@ brew install bats
 brew install gist
 brew install imagemagick
 brew install jq
+brew install jid
 brew install node
 brew install python
 brew install python3
